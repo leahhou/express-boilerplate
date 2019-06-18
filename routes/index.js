@@ -16,6 +16,9 @@ router.post("/register", celebrate({ // validate twice, this is the 1st validate
     }
 }), AuthenticationController.register);
 
+router.get("/login", authRedirect, AuthenticationController.loginNew);
+router.post("/login", AuthenticationController.login);
+
 router.get("/logout", AuthenticationController.logout);
 
 router.get("/dashboard", authorise, PageController.dashboard);
