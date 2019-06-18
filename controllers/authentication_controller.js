@@ -25,7 +25,7 @@ function loginNew(req, res) {
 async function login(req,res) {
     const {email, password} = req.body;
     const user = await UserModel.findOne({email});
-    const valid = await user.verifyPassword(password);
+    const valid = user ? await user.verifyPassword(password) : null;
     if (user && valid) {
         req.session.user = user;
         return res.redirect("/dashboard")
@@ -36,5 +36,7 @@ async function login(req,res) {
 module.exports = {
     registerNew,
     register,
-    logout
+    logout,
+    loginNew,
+    login
 }
