@@ -18,6 +18,21 @@ function logout(req, res) {
     });
 }
 
+function loginNew(req, res) {
+    res.render("authentication/login"); 
+}
+
+async function login(req,res) {
+    const {email, password} = req.body;
+    const user = await UserModel.findOne({email});
+    const valid = await user.verifyPassword(password);
+    if (user && valid) {
+        req.session.user = user;
+        return res.redirect("/dashboard")
+    }
+    return res.send("sorry, incorrect")
+}
+
 module.exports = {
     registerNew,
     register,
