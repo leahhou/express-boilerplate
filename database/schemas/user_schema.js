@@ -1,7 +1,7 @@
 const { Schema } = require("mongoose");
 
 const UserSchema = new Schema({
-    email: {
+    email: { //2nd validation at the layer between model to database
         type: String,
         required: true,
         trim: true,
@@ -11,10 +11,10 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        bcrypt: true
+        bcrypt: true // to encrypt the password when stored in database
     }
 });
 
-UserSchema.plugin(require("mongoose-bcrypt"));
+UserSchema.plugin(require("mongoose-bcrypt")); // to encrypt the password when stored in database
 
 module.exports = UserSchema;

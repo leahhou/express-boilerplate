@@ -7,6 +7,7 @@ function registerNew(req, res) {
 async function register(req, res) {
     const { email, password } = req.body;
     const user = await UserModel.create({ email, password });
+    // save the log in information of in session, which is stored in cookie;
     req.session.user = user;
     res.redirect("/dashboard");
 }

@@ -9,7 +9,7 @@ router.get("/", PageController.index);
 
 router.get("/register", authRedirect, AuthenticationController.registerNew);
 
-router.post("/register", celebrate({
+router.post("/register", celebrate({ // validate twice, this is the 1st validate, set at the layer from route to controller
     body: {
         email: Joi.string().required(),
         password: Joi.string().required()
